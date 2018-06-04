@@ -4,4 +4,4 @@ services:
   - docker
   
 script:
-- docker build . 
+- docker build -t generalmeow/rethinkdb:2.6-arm
