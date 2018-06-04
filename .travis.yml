@@ -4,4 +4,4 @@ services:
   - docker
   
 script:
-- docker build < Dockerfile-arm
+- docker build Dockerfile-arm
