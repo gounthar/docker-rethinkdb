@@ -1,6 +1,6 @@
 # build: docker build -t generalmeow/rethinkdb:<TAG>
 # run: docker run -d -p 28015:28015 -p <>:8080 --name rethinkdb -v <>:/var/lib/rethinkdb/default -v <>:/var/log/rethinkdb generalmeow/rethinkdb:<TAG>
-FROM ubuntu:latest
+FROM resin/qemux86-alpine:latest
 MAINTAINER Paul Hoang 2017-01-18
 EXPOSE 28015
 EXPOSE 8080
