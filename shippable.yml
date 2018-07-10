@@ -1,7 +1,7 @@
+language: none
+
 sudo: required
 
-services:
-  - docker
-  
-script:
-- docker build Dockerfile-arm
+build:
+ ci:
+  - docker build Dockerfile-arm
