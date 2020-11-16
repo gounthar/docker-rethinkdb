@@ -8,6 +8,8 @@ RUN ["mkdir", "-p", "/home/rethinkdb/files"]
 RUN ["mkdir", "-p", "/home/rethinkdb/data"]
 RUN ["mkdir", "-p", "/home/rethinkdb/logs"]
 RUN ["touch", "/home/rethinkdb/logs/log"]
+RUN wget https://github.com/srh/rethinkdb/archive/v2.4.0-srh-win-1.tar.gz && tar -xzf v2.4.0-srh-win-1.tar.gz && cd rethinkdb-2.4.0-srh-win-1 && \
+    ./configure --allow-fetch --fetch coffee --fetch npm && make -j$(($(nproc)/2))
 COPY ["./files/install.sh", "/home/rethinkdb/files/install.sh"]
 RUN ["/home/rethinkdb/files/install.sh"]
 COPY ["./files/etc/rethinkdb/instances.d/instance.conf", "/etc/rethinkdb/instances.d/instance.conf"]
