@@ -7,7 +7,7 @@ EXPOSE 8080
 RUN mkdir -p /home/rethinkdb/files && mkdir -p /home/rethinkdb/data && mkdir -p /home/rethinkdb/logs && touch /home/rethinkdb/logs/log && \
     apk update && apk add bash alpine-sdk python2 perl protobuf
 RUN wget https://github.com/srh/rethinkdb/archive/v2.4.0-srh-win-1.tar.gz && tar -xzf v2.4.0-srh-win-1.tar.gz && cd rethinkdb-2.4.0-srh-win-1 && \
-    ./configure --allow-fetch --fetch coffee --fetch npm && grep MACHINE config.mk && make -j$(($(nproc)/2))
+    ./configure --allow-fetch --fetch coffee --fetch npm && grep MACHINE config.mk && sed 's/.*aarch64-alpine-linux-musl.*/MACHINE := aarch64/' && make -j$(($(nproc)/2))
 COPY ["./files/install.sh", "/home/rethinkdb/files/install.sh"]
 RUN ["/home/rethinkdb/files/install.sh"]
 COPY ["./files/etc/rethinkdb/instances.d/instance.conf", "/etc/rethinkdb/instances.d/instance.conf"]
