@@ -4,10 +4,8 @@ FROM alpine:latest
 MAINTAINER Paul Hoang 2017-01-18
 EXPOSE 28015
 EXPOSE 8080
-RUN ["mkdir", "-p", "/home/rethinkdb/files"]
-RUN ["mkdir", "-p", "/home/rethinkdb/data"]
-RUN ["mkdir", "-p", "/home/rethinkdb/logs"]
-RUN ["touch", "/home/rethinkdb/logs/log"]
+RUN mkdir -p /home/rethinkdb/files && mkdir -p /home/rethinkdb/data && mkdir -p /home/rethinkdb/logs && touch /home/rethinkdb/logs/log && \
+    apk update && apk add bash
 RUN wget https://github.com/srh/rethinkdb/archive/v2.4.0-srh-win-1.tar.gz && tar -xzf v2.4.0-srh-win-1.tar.gz && cd rethinkdb-2.4.0-srh-win-1 && \
     ./configure --allow-fetch --fetch coffee --fetch npm && make -j$(($(nproc)/2))
 COPY ["./files/install.sh", "/home/rethinkdb/files/install.sh"]
