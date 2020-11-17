@@ -4,8 +4,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 RUN apt-get update -yq \
     && apt-get install -yq --no-install-recommends \
-        g++-4.9 \
-        gcc-4.9 \
+        g++ \
+        gcc \
         libboost-all-dev \
         libcurl4-openssl-dev \
         libncurses5-dev \
