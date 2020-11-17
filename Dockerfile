@@ -8,7 +8,7 @@ RUN mkdir -p /home/rethinkdb/files && mkdir -p /home/rethinkdb/data && mkdir -p 
     apk update && apk add bash alpine-sdk python2 perl protobuf protoc
 RUN wget https://github.com/srh/rethinkdb/archive/v2.4.0-srh-win-1.tar.gz && tar -xzf v2.4.0-srh-win-1.tar.gz && cd rethinkdb-2.4.0-srh-win-1 && \
     ./configure --allow-fetch --fetch coffee --fetch npm && grep MACHINE config.mk && sed -i 's/.*aarch64-alpine-linux-musl.*/MACHINE := aarch64/' config.mk && \
- sed -i 's/.*2.5.0.*/version=3.6.0/' config.mk && make -j$(($(nproc)/2))
+ sed -i 's/.*2.5.0.*/version=3.6.0/' ./mk/support/pkg/protobuf.sh && make -j$(($(nproc)/2))
 COPY ["./files/install.sh", "/home/rethinkdb/files/install.sh"]
 RUN ["/home/rethinkdb/files/install.sh"]
 COPY ["./files/etc/rethinkdb/instances.d/instance.conf", "/etc/rethinkdb/instances.d/instance.conf"]
