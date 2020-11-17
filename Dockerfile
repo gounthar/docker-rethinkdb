@@ -5,7 +5,7 @@ MAINTAINER Paul Hoang 2017-01-18
 EXPOSE 28015
 EXPOSE 8080
 RUN mkdir -p /home/rethinkdb/files && mkdir -p /home/rethinkdb/data && mkdir -p /home/rethinkdb/logs && touch /home/rethinkdb/logs/log && \
-    apt update && apt install bash build-essential python2 perl libprotobuf-dev libprotoc-dev && protoc --version
+    apt update && apt install -y bash build-essential python2 perl libprotobuf-dev libprotoc-dev && protoc --version
 RUN wget https://github.com/srh/rethinkdb/archive/v2.4.0-srh-win-1.tar.gz && tar -xzf v2.4.0-srh-win-1.tar.gz && cd rethinkdb-2.4.0-srh-win-1 && \
     ./configure --allow-fetch --fetch coffee --fetch npm --fetch protobuf && grep MACHINE config.mk && sed -i 's/.*aarch64-alpine-linux-musl.*/MACHINE := aarch64/' config.mk && \
   sed -i 's/.*2.5.0.*/version=2.6.0/' ./mk/support/pkg/protobuf.sh && \
