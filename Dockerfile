@@ -11,7 +11,7 @@ RUN wget https://github.com/srh/rethinkdb/archive/v2.4.0-srh-win-1.tar.gz && tar
   sed -i 's/.*2.5.0.*/version=2.6.0/' ./mk/support/pkg/protobuf.sh && \
   sed -i 's|\(^.*src_url_sha1=.*\)62c10dcdac4b69cc8c6bb19f73db40c264cb2726\(.*$\)|\16d9dc4c5899232e2397251f9323cbdf176391d1b\2|i' ./mk/support/pkg/protobuf.sh && \
   find . -name protobuf.sh && cat ./mk/support/pkg/protobuf.sh && sed -i 's|\(^.*proto.*\)2.5.0\(.*$\)|\12.6.0\2|i' config.mk && \
-  cat config.mk | grep -i proto && make -j$(($(nproc)/2))
+  cat config.mk | grep -i proto && make -j$(nproc)
 COPY ["./files/install.sh", "/home/rethinkdb/files/install.sh"]
 RUN ["/home/rethinkdb/files/install.sh"]
 COPY ["./files/etc/rethinkdb/instances.d/instance.conf", "/etc/rethinkdb/instances.d/instance.conf"]
