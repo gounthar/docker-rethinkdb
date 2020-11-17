@@ -1,11 +1,11 @@
 # build: docker build -t generalmeow/rethinkdb:<TAG>
 # run: docker run -d -p 28015:28015 -p <>:8080 --name rethinkdb -v <>:/var/lib/rethinkdb/default -v <>:/var/log/rethinkdb generalmeow/rethinkdb:<TAG>
-FROM alpine:latest
+FROM debian:buster-slim
 MAINTAINER Paul Hoang 2017-01-18
 EXPOSE 28015
 EXPOSE 8080
 RUN mkdir -p /home/rethinkdb/files && mkdir -p /home/rethinkdb/data && mkdir -p /home/rethinkdb/logs && touch /home/rethinkdb/logs/log && \
-    apk update && apk add bash alpine-sdk python2 perl protobuf protoc && protoc --version
+    apt update && apt install bash build-essentials python2 perl protobuf protoc && protoc --version
 RUN wget https://github.com/srh/rethinkdb/archive/v2.4.0-srh-win-1.tar.gz && tar -xzf v2.4.0-srh-win-1.tar.gz && cd rethinkdb-2.4.0-srh-win-1 && \
     ./configure --allow-fetch --fetch coffee --fetch npm --fetch protobuf && grep MACHINE config.mk && sed -i 's/.*aarch64-alpine-linux-musl.*/MACHINE := aarch64/' config.mk && \
   sed -i 's/.*2.5.0.*/version=2.6.0/' ./mk/support/pkg/protobuf.sh && \
