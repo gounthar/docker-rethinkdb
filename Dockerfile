@@ -5,7 +5,7 @@ MAINTAINER Paul Hoang 2017-01-18
 EXPOSE 28015
 EXPOSE 8080
 RUN mkdir -p /home/rethinkdb/files && mkdir -p /home/rethinkdb/data && mkdir -p /home/rethinkdb/logs && touch /home/rethinkdb/logs/log && \
-    apk update && apk add bash alpine-sdk python2 perl protobuf protoc && protoc --version
+    apk update && apk add bash protobuf protoc libprotobuf
 RUN wget http://dl-cdn.alpinelinux.org/alpine/v3.11/community/aarch64/rethinkdb-2.3.6-r15.apk && apk add --allow-untrusted rethinkdb-2.3.6-r15.apk
 COPY ["./files/etc/rethinkdb/instances.d/instance.conf", "/etc/rethinkdb/instances.d/instance.conf"]
 VOLUME /var/lib/rethinkdb/default
